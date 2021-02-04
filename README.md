@@ -1,49 +1,23 @@
-# Flask by Example
+Dotenv
 
-## Blog Posts
+Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
 
-This is the repo for the Real Python blog series, Flask by Example -
+Process.env  ->   returns an object containing the user environment. 
 
-1. [Part One](https://realpython.com/blog/python/flask-by-example-part-1-project-setup/): Set up a local development environment and then deploy both a staging and a production environment on Heroku.
-1. [Part Two](https://realpython.com/blog/python/flask-by-example-part-2-postgres-sqlalchemy-and-alembic): Set up a PostgreSQL database along with SQLAlchemy and Alembic to handle migrations.
-1. [Part Three](https://realpython.com/blog/python/flask-by-example-part-3-text-processing-with-requests-beautifulsoup-nltk/): Add in the back-end logic to scrape and then process the word counts from a webpage using the requests, BeautifulSoup, and Natural Language Toolkit (NLTK) libraries.
-1. [Part Four](https://realpython.com/blog/python/flask-by-example-implementing-a-redis-task-queue/): Implement a Redis task queue to handle the text processing.
-1. [Part Five](https://realpython.com/blog/python/flask-by-example-integrating-flask-and-angularjs/): Set up Angular on the front-end to continuously poll the back-end to see if the request is done processing.
-1. [Part Six](https://realpython.com/blog/python/updating-the-staging-environment/): Push to the staging server on Heroku - setting up Redis and detailing how to run two processes (web and worker) on a single Dyno.
-1. [Part Seven](https://realpython.com/blog/python/flask-by-example-updating-the-ui/): Update the front-end to make it more user-friendly.
-1. Part Eight: Add the D3 library into the mix to graph a frequency distribution and histogram.
+The Twelve-Factor App - The twelve-factor app stores config in environment variables (often shortened to env vars or env). Env vars are easy to change between deploys without changing any code; unlike config files, there is little chance of them being checked into the code repo accidentally.
 
-Check out http://realpython.com
+Place all the required variables into  .env 
 
-## Quick Start
+Not to track them by git you can place the .env  in  .gitignore
 
-### First Steps
 
-```sh
-$ pyvenv-3.5 env
-$ source env/bin/activate
-$ pip install -r requirements.txt
-```
+Include:
 
-### Set up Migrations
+from dotenv import load_dotenv
+load_dotenv()
 
-```sh
-$ python manage.py db init
-$ python manage.py db migrate
-$ python manage.py db upgrade
-```
 
-### Run
 
-Run each in a different terminal window...
+At this point, parsed key/value from the .env file is now present as system environment variable and they can be conveniently accessed via os.getenv():
 
-```sh
-# redis
-$ redis server
 
-# worker process
-$ python worker.py
-
-# the app
-$ python app.py
-```
